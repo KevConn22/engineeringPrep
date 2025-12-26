@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngineerPrep - Technical Interview Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(30, 41, 59, 0.5);
+            border-bottom: 1px solid #334155;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #60a5fa;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .btn-nav {
+            background: #334155;
+            color: #cbd5e1;
+        }
+
+        .btn-nav:hover {
+            background: #475569;
+        }
+
+        .btn-nav.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-danger {
+            background: transparent;
+            color: #ef4444;
+            padding: 0.5rem;
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid-cols-3 {
+            grid-template-columns: 1fr 2fr;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+
+        .question-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .question-item {
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            background: rgba(51, 65, 85, 0.5);
+            color: #cbd5e1;
+            transition: all 0.2s;
+        }
+
+        .question-item:hover {
+            background: #334155;
+        }
+
+        .question-item.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .question-item-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .question-title {
+            font-weight: 500;
+        }
+
+        .question-meta {
+            font-size: 0.875rem;
+            opacity: 0.75;
+            margin-top: 0.25rem;
+        }
+
+        .status-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid currentColor;
+        }
+
+        .status-icon.completed {
+            background: #22c55e;
+            border-color: #22c55e;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+        }
+
+        .badge-category {
+            background: rgba(37, 99, 235, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+        }
+
+        .badge-easy {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .badge-medium {
+            background: rgba(234, 179, 8, 0.2);
+            color: #facc15;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .badge-hard {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .info-box {
+            background: rgba(51, 65, 85, 0.3);
+            border: 1px solid #475569;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .info-box h3 {
+            color: #cbd5e1;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: start;
+        }
+
+        .info-list li:before {
+            content: "•";
+            color: #60a5fa;
+            margin-right: 0.5rem;
+        }
+
+        .question-box {
+            background: rgba(30, 58, 138, 0.2);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .question-box h3 {
+            color: #93c5fd;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 0.5rem;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .feedback {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .feedback-correct {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+        }
+
+        .feedback-incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+
+        .feedback h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .feedback-correct h3 {
+            color: #4ade80;
+        }
+
+        .feedback-incorrect h3 {
+            color: #f87171;
+        }
+
+        .solution-box {
+            background: rgba(51, 65, 85, 0.5);
+            border: 1px solid #475569;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .solution-box h4 {
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+        }
+
+        .formula {
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: #cbd5e1;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            color: #cbd5e1;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+
+        .close-btn:hover {
+            color: #cbd5e1;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 0.5rem;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .add-line-btn {
+            background: none;
+            border: none;
+            color: #60a5fa;
+            font-size: 0.875rem;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .add-line-btn:hover {
+            color: #93c5fd;
+        }
+
+        .manage-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .manage-item {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        .manage-item-content {
+            flex: 1;
+        }
+
+        .manage-item h3 {
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+        }
+
+        .manage-item-meta {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-actions h2 {
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1 class="logo">EngineerPrep</h1>
+            <div class="nav-buttons">
+                <button class="btn btn-nav active" id="practiceBtn">Practice</button>
+                <button class="btn btn-nav" id="manageBtn">Manage Questions</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Practice View -->
+        <div id="practiceView">
+            <div class="grid grid-cols-3">
+                <!-- Question List -->
+                <div class="card">
+                    <h2 style="margin-bottom: 1rem; color: #cbd5e1;">Questions</h2>
+                    <div class="question-list" id="questionList"></div>
+                </div>
+
+                <!-- Question Detail -->
+                <div class="card" id="questionDetail">
+                    <p style="color: #94a3b8;">Select a question to begin</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage View -->
+        <div id="manageView" class="hidden">
+            <div class="header-actions">
+                <h2>Manage Questions</h2>
+                <button class="btn btn-primary" id="addQuestionBtn">+ Add Question</button>
+            </div>
+            <div class="manage-grid" id="manageGrid"></div>
+        </div>
+    </div>
+
+    <!-- Add Question Modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Question</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label>Title *</label>
+                <input type="text" id="inputTitle" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select id="inputCategory">
+                        <option>Mechanical</option>
+                        <option>Aerospace</option>
+                        <option>Thermodynamics</option>
+                        <option>Fluid Mechanics</option>
+                        <option>Materials</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Difficulty *</label>
+                    <select id="inputDifficulty">
+                        <option>Easy</option>
+                        <option>Medium</option>
+                        <option>Hard</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Description *</label>
+                <textarea id="inputDescription" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Question *</label>
+                <input type="text" id="inputQuestion" required>
+            </div>
+
+            <div class="form-group">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <label style="margin: 0;">Given Information</label>
+                    <button class="add-line-btn" id="addInfoBtn">+ Add Line</button>
+                </div>
+                <div id="givenInfoInputs"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Formula *</label>
+                <input type="text" id="inputFormula" required style="font-family: monospace;">
+            </div>
+
+            <div class="form-row-3">
+                <div class="form-group">
+                    <label>Answer *</label>
+                    <input type="text" id="inputAnswer" required>
+                </div>
+                <div class="form-group">
+                    <label>Unit *</label>
+                    <input type="text" id="inputUnit" required>
+                </div>
+                <div class="form-group">
+                    <label>Tolerance *</label>
+                    <input type="number" step="any" id="inputTolerance" value="0.01" required>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+                <button class="btn" style="flex: 1; background: #334155; color: #cbd5e1;" id="cancelBtn">Cancel</button>
+                <button class="btn btn-primary" style="flex: 1;" id="submitBtn">Add Question</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Storage
+        const DB = {
+            getQuestions() {
+                const stored = localStorage.getItem('engineerPrepQuestions');
+                if (stored) {
+                    return JSON.parse(stored);
+                }
+                
+                // Default questions
+                const defaultQuestions = [
+                    {
+                        id: 1,
+                        title: "Beam Deflection Analysis",
+                        category: "Mechanical",
+                        difficulty: "Medium",
+                        description: "A simply supported beam of length 10m carries a uniformly distributed load of 5 kN/m. The beam has a Young's modulus of 200 GPa and a moment of inertia of 8.5×10⁻⁶ m⁴.",
+                        question: "Calculate the maximum deflection of the beam in millimeters.",
+                        givenInfo: [
+                            "Length (L) = 10 m",
+                            "Load (w) = 5 kN/m = 5000 N/m",
+                            "Young's Modulus (E) = 200 GPa = 200×10⁹ Pa",
+                            "Moment of Inertia (I) = 8.5×10⁻⁶ m⁴"
+                        ],
+                        formula: "δ_max = (5wL⁴)/(384EI)",
+                        answer: "15.28",
+                        unit: "mm",
+                        tolerance: 0.5,
+                        completed: false
+                    },
+                    {
+                        id: 2,
+                        title: "Rocket Thrust Calculation",
+                        category: "Aerospace",
+                        difficulty: "Hard",
+                        description: "A rocket engine expels exhaust gases at a velocity of 3000 m/s relative to the rocket. The mass flow rate of the exhaust is 150 kg/s.",
+                        question: "Calculate the thrust produced by the rocket engine in kilonewtons (kN).",
+                        givenInfo: [
+                            "Exhaust velocity (v_e) = 3000 m/s",
+                            "Mass flow rate (ṁ) = 150 kg/s"
+                        ],
+                        formula: "F = ṁ × v_e",
+                        answer: "450",
+                        unit: "kN",
+                        tolerance: 1,
+                        completed: false
+                    }
+                ];
+                
+                this.saveQuestions(defaultQuestions);
+                return defaultQuestions;
+            },
+            
+            saveQuestions(questions) {
+                localStorage.setItem('engineerPrepQuestions', JSON.stringify(questions));
+            },
+            
+            checkAnswer(questionId, userAnswer) {
+                const questions = this.getQuestions();
+                const question = questions.find(q => q.id === questionId);
+                
+                if (!question) return { correct: false, message: "Question not found" };
+                
+                const numAnswer = parseFloat(userAnswer);
+                const correctAnswer = parseFloat(question.answer);
+                const tolerance = question.tolerance || 0.01;
+                
+                const isCorrect = Math.abs(numAnswer - correctAnswer) <= tolerance;
+                
+                return {
+                    correct: isCorrect,
+                    message: isCorrect 
+                        ? `Correct! The answer is ${correctAnswer} ${question.unit}.`
+                        : `Incorrect. Your answer: ${numAnswer} ${question.unit}. Correct answer: ${correctAnswer} ${question.unit}.`,
+                    correctAnswer: correctAnswer,
+                    yourAnswer: numAnswer
+                };
+            }
+        };
+
+        // State
+        let questions = [];
+        let selectedQuestion = null;
+        let currentView = 'practice';
+
+        // Initialize
+        function init() {
+            questions = DB.getQuestions();
+            if (questions.length > 0) {
+                selectedQuestion = questions[0];
+            }
+            renderQuestionList();
+            renderQuestionDetail();
+            
+            // Event listeners
+            document.getElementById('practiceBtn').addEventListener('click', () => switchView('practice'));
+            document.getElementById('manageBtn').addEventListener('click', () => switchView('manage'));
+            document.getElementById('addQuestionBtn').addEventListener('click', () => openAddModal());
+            document.getElementById('closeModal').addEventListener('click', () => closeAddModal());
+            document.getElementById('cancelBtn').addEventListener('click', () => closeAddModal());
+            document.getElementById('submitBtn').addEventListener('click', () => handleAddQuestion());
+            document.getElementById('addInfoBtn').addEventListener('click', () => addGivenInfoInput());
+            
+            // Initialize with one given info input
+            addGivenInfoInput();
+        }
+
+        function switchView(view) {
+            currentView = view;
+            
+            if (view === 'practice') {
+                document.getElementById('practiceView').classList.remove('hidden');
+                document.getElementById('manageView').classList.add('hidden');
+                document.getElementById('practiceBtn').classList.add('active');
+                document.getElementById('manageBtn').classList.remove('active');
+            } else {
+                document.getElementById('practiceView').classList.add('hidden');
+                document.getElementById('manageView').classList.remove('hidden');
+                document.getElementById('practiceBtn').classList.remove('active');
+                document.getElementById('manageBtn').classList.add('active');
+                renderManageView();
+            }
+        }
+
+        function renderQuestionList() {
+            const list = document.getElementById('questionList');
+            list.innerHTML = questions.map(q => `
+                <button class="question-item ${selectedQuestion?.id === q.id ? 'active' : ''}" 
+                        onclick="selectQuestion(${q.id})">
+                    <div class="question-item-content">
+                        <div style="flex: 1;">
+                            <div class="question-title">${q.title}</div>
+                            <div class="question-meta">${q.category} • ${q.difficulty}</div>
+                        </div>
+                        <div class="status-icon ${q.completed ? 'completed' : ''}"></div>
+                    </div>
+                </button>
+            `).join('');
+        }
+
+        function selectQuestion(id) {
+            selectedQuestion = questions.find(q => q.id === id);
+            renderQuestionList();
+            renderQuestionDetail();
+        }
+
+        function renderQuestionDetail() {
+            const detail = document.getElementById('questionDetail');
+            
+            if (!selectedQuestion) {
+                detail.innerHTML = '<p style="color: #94a3b8;">Select a question to begin</p>';
+                return;
+            }
+            
+            detail.innerHTML = `
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                        <h2 style="color: #cbd5e1;">${selectedQuestion.title}</h2>
+                        <span class="badge badge-category">${selectedQuestion.category}</span>
+                        <span class="badge badge-${selectedQuestion.difficulty.toLowerCase()}">${selectedQuestion.difficulty}</span>
+                    </div>
+                    <p style="color: #cbd5e1; line-height: 1.6; margin-bottom: 1.5rem;">${selectedQuestion.description}</p>
+
+                    <div class="info-box">
+                        <h3>Given Information:</h3>
+                        <ul class="info-list">
+                            ${selectedQuestion.givenInfo.map(info => `<li><span class="formula">${info}</span></li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="question-box">
+                        <h3>Question:</h3>
+                        <p style="color: #cbd5e1;">${selectedQuestion.question}</p>
+                    </div>
+
+                    <div id="answerSection"></div>
+                </div>
+            `;
+            
+            renderAnswerSection();
+        }
+
+        function renderAnswerSection() {
+            const section = document.getElementById('answerSection');
+            const userAnswer = sessionStorage.getItem(`answer_${selectedQuestion.id}`) || '';
+            const feedback = sessionStorage.getItem(`feedback_${selectedQuestion.id}`);
+            
+            if (feedback) {
+                const feedbackData = JSON.parse(feedback);
+                section.innerHTML = `
+                    <div class="feedback ${feedbackData.correct ? 'feedback-correct' : 'feedback-incorrect'}">
+                        <h3>${feedbackData.correct ? '✓ Correct!' : '✗ Incorrect'}</h3>
+                        <p style="color: #cbd5e1; margin-bottom: 1rem;">${feedbackData.message}</p>
+                        
+                        <div class="solution-box">
+                            <h4>Solution:</h4>
+                            <p class="formula" style="margin-bottom: 0.5rem;">${selectedQuestion.formula}</p>
+                            <p style="color: #94a3b8; font-size: 0.875rem;">
+                                Substituting the values and solving gives ${selectedQuestion.answer} ${selectedQuestion.unit}
+                            </p>
+                        </div>
+
+                        <button class="btn btn-primary" style="width: 100%;" onclick="nextQuestion()">
+                            Next Question
+                        </button>
+                    </div>
+                `;
+            } else {
+                section.innerHTML = `
+                    <div>
+                        <label style="display: block; color: #cbd5e1; margin-bottom: 0.5rem; font-size: 0.875rem;">
+                            Your Answer (${selectedQuestion.unit}):
+                        </label>
+                        <div class="input-group">
+                            <input type="number" 
+                                   step="any" 
+                                   class="input" 
+                                   id="userAnswer" 
+                                   value="${userAnswer}"
+                                   placeholder="Enter your answer"
+                                   onkeypress="if(event.key === 'Enter') submitAnswer()">
+                            <button class="btn btn-primary" onclick="submitAnswer()">Submit</button>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function submitAnswer() {
+            const input = document.getElementById('userAnswer');
+            const userAnswer = input.value.trim();
+            
+            if (!userAnswer) return;
+            
+            const result = DB.checkAnswer(selectedQuestion.id, userAnswer);
+            sessionStorage.setItem(`answer_${selectedQuestion.id}`, userAnswer);
+            sessionStorage.setItem(`feedback_${selectedQuestion.id}`, JSON.stringify(result));
+            
+            if (result.correct) {
+                questions = questions.map(q => 
+                    q.id === selectedQuestion.id ? { ...q, completed: true } : q
+                );
+                DB.saveQuestions(questions);
+                renderQuestionList();
+            }
+            
+            renderAnswerSection();
+        }
+
+        function nextQuestion() {
+            sessionStorage.removeItem(`answer_${selectedQuestion.id}`);
+            sessionStorage.removeItem(`feedback_${selectedQuestion.id}`);
+            
+            const currentIndex = questions.findIndex(q => q.id === selectedQuestion.id);
+            const nextIndex = (currentIndex + 1) % questions.length;
+            selectQuestion(questions[nextIndex].id);
+        }
+
+        function renderManageView() {
+            const grid = document.getElementById('manageGrid');
+            grid.innerHTML = questions.map(q => `
+                <div class="manage-item">
+                    <div class="manage-item-content">
+                        <h3>${q.title}</h3>
+                        <div class="manage-item-meta">
+                            <span class="badge badge-category">${q.category}</span>
+                            <span class="badge badge-${q.difficulty.toLowerCase()}">${q.difficulty}</span>
+                        </div>
+                        <p style="color: #94a3b8; font-size: 0.875rem; margin-bottom: 0.5rem;">${q.description}</p>
+                        <p style="color: #cbd5e1; font-size: 0.875rem;">
+                            <span style="font-weight: 500;">Answer:</span> ${q.answer} ${q.unit}
+                        </p>
+                    </div>
+                    <button class="btn btn-danger" onclick="deleteQuestion(${q.id})">×</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteQuestion(id) {
+            if (!confirm('Are you sure you want to delete this question?')) return;
+            
+            questions = questions.filter(q => q.id !== id);
+            DB.saveQuestions(questions);
+            
+            if (selectedQuestion?.id === id) {
+                selectedQuestion = questions[0] || null;
+            }
+            
+            renderManageView();
+            renderQuestionList();
+        }
+
+        function openAddModal() {
+            document.getElementById('addModal').classList.add('active');
+            document.getElementById('givenInfoInputs').innerHTML = '';
+            addGivenInfoInput();
+        }
+
+        function closeAddModal() {
+            document.getElementById('addModal').classList.remove('active');
+            clearForm();
+        }
+
+        function clearForm() {
+            document.getElementById('inputTitle').value = '';
+            document.getElementById('inputCategory').value = 'Mechanical';
+            document.getElementById('inputDifficulty').value = 'Medium';
+            document.getElementById('inputDescription').value = '';
+            document.getElementById('inputQuestion').value = '';
+            document.getElementById('inputFormula').value = '';
+            document.getElementById('inputAnswer').value = '';
+            document.getElementById('inputUnit').value = '';
+            document.getElementById('inputTolerance').value = '0.01';
+            document.getElementById('givenInfoInputs').innerHTML = '';
+        }
+
+        function addGivenInfoInput() {
+            const container = document.getElementById('givenInfoInputs');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'input';
+            input.placeholder = 'e.g., Length (L) = 10 m';
+            input.style.marginBottom = '0.5rem';
+            container.appendChild(input);
+        }
+
+        function handleAddQuestion() {
+            const title = document.getElementById('inputTitle').value.trim();
+            const category = document.getElementById('inputCategory').value;
+            const difficulty = document.getElementById('inputDifficulty').value;
+            const description = document.getElementById('inputDescription').value.trim();
+            const question = document.getElementById('inputQuestion').value.trim();
+            const formula = document.getElementById('inputFormula').value.trim();
+            const answer = document.getElementById('inputAnswer').value.trim();
+            const unit = document.getElementById('inputUnit').value.trim();
+            const tolerance = document.getElementById('inputTolerance').value;
+
+            if (!title || !description || !question || !formula || !answer || !unit) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            const givenInfoInputs = document.getElementById('givenInfoInputs').getElementsByTagName('input');
+            const givenInfo = Array.from(givenInfoInputs)
+                .map(input => input.value.trim())
+                .filter(val => val);
+
+            const newQuestion = {
+                id: Math.max(...questions.map(q => q.id), 0) + 1,
+                title,
+                category,
+                difficulty,
+                description,
+                question,
+                givenInfo,
+                formula,
+                answer,
+                unit,
+                tolerance: parseFloat(tolerance),
+                completed: false
+            };
+
+            questions.push(newQuestion);
+            DB.saveQuestions(questions);
+            
+            closeAddModal();
+            renderManageView();
+            renderQuestionList();
+            
+            alert('Question added successfully!');
+        }
+
+        // Start the app
+        init();
