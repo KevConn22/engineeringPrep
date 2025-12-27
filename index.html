@@ -1,988 +1,976 @@
-```html
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+.header {
+    background: rgba(30, 41, 59, 0.5);
+    border-bottom: 1px solid #334155;
+    backdrop-filter: blur(10px);
+}
+
+.header-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #60a5fa;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.btn-nav {
+    background: #334155;
+    color: #cbd5e1;
+}
+
+.btn-nav:hover {
+    background: #475569;
+}
+
+.btn-nav.active {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.btn-primary:disabled {
+    background: #475569;
+    cursor: not-allowed;
+}
+
+.btn-danger {
+    background: transparent;
+    color: #ef4444;
+    padding: 0.5rem;
+}
+
+.btn-danger:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.grid-cols-3 {
+    grid-template-columns: 1fr 2fr;
+}
+
+@media (max-width: 1024px) {
+    .grid-cols-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid #334155;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.question-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.question-item {
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background: rgba(51, 65, 85, 0.5);
+    color: #cbd5e1;
+    transition: all 0.2s;
+}
+
+.question-item:hover {
+    background: #334155;
+}
+
+.question-item.active {
+    background: #2563eb;
+    color: white;
+}
+
+.question-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.question-title {
+    font-weight: 500;
+}
+
+.question-meta {
+    font-size: 0.875rem;
+    opacity: 0.75;
+    margin-top: 0.25rem;
+}
+
+.status-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+}
+
+.status-icon.completed {
+    background: #22c55e;
+    border-color: #22c55e;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+}
+
+.badge-category {
+    background: rgba(37, 99, 235, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+.badge-easy {
+    background: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.badge-medium {
+    background: rgba(234, 179, 8, 0.2);
+    color: #facc15;
+    border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.badge-hard {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.info-box {
+    background: rgba(51, 65, 85, 0.3);
+    border: 1px solid #475569;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.info-box h3 {
+    color: #cbd5e1;
+    margin-bottom: 0.75rem;
+}
+
+.info-list {
+    list-style: none;
+}
+
+.info-list li {
+    color: #cbd5e1;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: start;
+}
+
+.info-list li:before {
+    content: "•";
+    color: #60a5fa;
+    margin-right: 0.5rem;
+}
+
+.question-box {
+    background: rgba(30, 58, 138, 0.2);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.question-box h3 {
+    color: #93c5fd;
+    margin-bottom: 0.5rem;
+}
+
+.input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: #334155;
+    border: 1px solid #475569;
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 1rem;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.feedback {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+}
+
+.feedback-correct {
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.5);
+}
+
+.feedback-incorrect {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.feedback h3 {
+    margin-bottom: 0.5rem;
+}
+
+.feedback-correct h3 {
+    color: #4ade80;
+}
+
+.feedback-incorrect h3 {
+    color: #f87171;
+}
+
+.solution-box {
+    background: rgba(51, 65, 85, 0.5);
+    border: 1px solid #475569;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    margin: 1rem 0;
+}
+
+.solution-box h4 {
+    color: #cbd5e1;
+    margin-bottom: 0.5rem;
+}
+
+.formula {
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    color: #cbd5e1;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 0.5rem;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+    color: #cbd5e1;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.close-btn:hover {
+    color: #cbd5e1;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    color: #cbd5e1;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: #334155;
+    border: 1px solid #475569;
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.add-line-btn {
+    background: none;
+    border: none;
+    color: #60a5fa;
+    font-size: 0.875rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.add-line-btn:hover {
+    color: #93c5fd;
+}
+
+.manage-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.manage-item {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid #334155;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.manage-item-content {
+    flex: 1;
+}
+
+.manage-item h3 {
+    color: #cbd5e1;
+    margin-bottom: 0.5rem;
+}
+
+.manage-item-meta {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.header-actions h2 {
+    color: #cbd5e1;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #94a3b8;
+}
+
+.error {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: #f87171;
+    margin: 1rem 0;
+}
+
+
+
+
+
+    EngineerPrep
+    
+        Practice
+        Manage Questions
+    
+
+
+
 
 
 
     
-    
-    EngineerPrep - Technical Interview Practice
-    
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-            color: #ffffff;
-            min-height: 100vh;
-        }
-
-        .header {
-            background: rgba(30, 41, 59, 0.5);
-            border-bottom: 1px solid #334155;
-            backdrop-filter: blur(10px);
-        }
-
-        .header-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #60a5fa;
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.2s;
-        }
-
-        .btn-nav {
-            background: #334155;
-            color: #cbd5e1;
-        }
-
-        .btn-nav:hover {
-            background: #475569;
-        }
-
-        .btn-nav.active {
-            background: #2563eb;
-            color: white;
-        }
-
-        .btn-primary {
-            background: #2563eb;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #1d4ed8;
-        }
-
-        .btn-primary:disabled {
-            background: #475569;
-            cursor: not-allowed;
-        }
-
-        .btn-danger {
-            background: transparent;
-            color: #ef4444;
-            padding: 0.5rem;
-        }
-
-        .btn-danger:hover {
-            background: rgba(239, 68, 68, 0.1);
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        .grid {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .grid-cols-3 {
-            grid-template-columns: 1fr 2fr;
-        }
-
-        @media (max-width: 1024px) {
-            .grid-cols-3 {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid #334155;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-        }
-
-        .question-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .question-item {
-            width: 100%;
-            text-align: left;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            background: rgba(51, 65, 85, 0.5);
-            color: #cbd5e1;
-            transition: all 0.2s;
-        }
-
-        .question-item:hover {
-            background: #334155;
-        }
-
-        .question-item.active {
-            background: #2563eb;
-            color: white;
-        }
-
-        .question-item-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .question-title {
-            font-weight: 500;
-        }
-
-        .question-meta {
-            font-size: 0.875rem;
-            opacity: 0.75;
-            margin-top: 0.25rem;
-        }
-
-        .status-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid currentColor;
-        }
-
-        .status-icon.completed {
-            background: #22c55e;
-            border-color: #22c55e;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.875rem;
-            margin-right: 0.5rem;
-        }
-
-        .badge-category {
-            background: rgba(37, 99, 235, 0.2);
-            color: #60a5fa;
-            border: 1px solid rgba(37, 99, 235, 0.3);
-        }
-
-        .badge-easy {
-            background: rgba(34, 197, 94, 0.2);
-            color: #4ade80;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        .badge-medium {
-            background: rgba(234, 179, 8, 0.2);
-            color: #facc15;
-            border: 1px solid rgba(234, 179, 8, 0.3);
-        }
-
-        .badge-hard {
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .info-box {
-            background: rgba(51, 65, 85, 0.3);
-            border: 1px solid #475569;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-
-        .info-box h3 {
-            color: #cbd5e1;
-            margin-bottom: 0.75rem;
-        }
-
-        .info-list {
-            list-style: none;
-        }
-
-        .info-list li {
-            color: #cbd5e1;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: start;
-        }
-
-        .info-list li:before {
-            content: "•";
-            color: #60a5fa;
-            margin-right: 0.5rem;
-        }
-
-        .question-box {
-            background: rgba(30, 58, 138, 0.2);
-            border: 1px solid rgba(37, 99, 235, 0.3);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-
-        .question-box h3 {
-            color: #93c5fd;
-            margin-bottom: 0.5rem;
-        }
-
-        .input-group {
-            display: flex;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .input {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            background: #334155;
-            border: 1px solid #475569;
-            border-radius: 0.5rem;
-            color: white;
-            font-size: 1rem;
-        }
-
-        .input:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .feedback {
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .feedback-correct {
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid rgba(34, 197, 94, 0.5);
-        }
-
-        .feedback-incorrect {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.5);
-        }
-
-        .feedback h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .feedback-correct h3 {
-            color: #4ade80;
-        }
-
-        .feedback-incorrect h3 {
-            color: #f87171;
-        }
-
-        .solution-box {
-            background: rgba(51, 65, 85, 0.5);
-            border: 1px solid #475569;
-            border-radius: 0.5rem;
-            padding: 0.75rem;
-            margin: 1rem 0;
-        }
-
-        .solution-box h4 {
-            color: #cbd5e1;
-            margin-bottom: 0.5rem;
-        }
-
-        .formula {
-            font-family: 'Courier New', monospace;
-            font-size: 0.875rem;
-            color: #cbd5e1;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 0.5rem;
-            max-width: 600px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 1.5rem;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-header h2 {
-            color: #cbd5e1;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: #94a3b8;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-        }
-
-        .close-btn:hover {
-            color: #cbd5e1;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            color: #cbd5e1;
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.5rem 0.75rem;
-            background: #334155;
-            border: 1px solid #475569;
-            border-radius: 0.5rem;
-            color: white;
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            font-family: inherit;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .form-row-3 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .add-line-btn {
-            background: none;
-            border: none;
-            color: #60a5fa;
-            font-size: 0.875rem;
-            cursor: pointer;
-            padding: 0;
-        }
-
-        .add-line-btn:hover {
-            color: #93c5fd;
-        }
-
-        .manage-grid {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .manage-item {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid #334155;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-        }
-
-        .manage-item-content {
-            flex: 1;
-        }
-
-        .manage-item h3 {
-            color: #cbd5e1;
-            margin-bottom: 0.5rem;
-        }
-
-        .manage-item-meta {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .header-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .header-actions h2 {
-            color: #cbd5e1;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: #94a3b8;
-        }
-
-        .error {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.5);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            color: #f87171;
-            margin: 1rem 0;
-        }
-    
-
-
-    
-        
-            EngineerPrep
-            
-                Practice
-                Manage Questions
-            
-        
-    
-
-    
         
         
-            
-                
-                
-                    Questions
-                    
-                        Loading questions...
-                    
-                
-
-                
-                
-                    Select a question to begin
-                
-            
-        
-
-        
-        
-            
-                Manage Questions
-                + Add Question
-            
+            Questions
             
                 Loading questions...
             
         
+
+        
+        
+            Select a question to begin
+        
     
 
+
+
+
     
+        Manage Questions
+        + Add Question
+    
+    
+        Loading questions...
+    
+
+
+
+
+
+
+    
+        Add New Question
+        &times;
+    
+    
+    
+        Title *
+        
+    
+
     
         
+            Category *
             
-                Add New Question
-                &times;
+                Mechanical
+                Aerospace
+                Thermodynamics
+                Fluid Mechanics
+                Materials
             
+        
+        
+            Difficulty *
             
-            
-                Title *
-                
-            
-
-            
-                
-                    Category *
-                    
-                        Mechanical
-                        Aerospace
-                        Thermodynamics
-                        Fluid Mechanics
-                        Materials
-                    
-                
-                
-                    Difficulty *
-                    
-                        Easy
-                        Medium
-                        Hard
-                    
-                
-            
-
-            
-                Description *
-                
-            
-
-            
-                Question *
-                
-            
-
-            
-                
-                    Given Information
-                    + Add Line
-                
-                
-            
-
-            
-                Formula *
-                
-            
-
-            
-                
-                    Answer *
-                    
-                
-                
-                    Unit *
-                    
-                
-                
-                    Tolerance *
-                    
-                
-            
-
-            
-                Cancel
-                Add Question
+                Easy
+                Medium
+                Hard
             
         
     
 
     
-        // API Configuration
-        const API_BASE = window.location.origin;
+        Description *
+        
+    
 
-        // API Functions
-        const API = {
-            async getQuestions() {
-                const response = await fetch(`${API_BASE}/api/questions`);
-                if (!response.ok) throw new Error('Failed to load questions');
-                return response.json();
-            },
-            
-            async addQuestion(question) {
-                const response = await fetch(`${API_BASE}/api/questions`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(question)
-                });
-                if (!response.ok) throw new Error('Failed to add question');
-                return response.json();
-            },
-            
-            async updateQuestion(id, data) {
-                const response = await fetch(`${API_BASE}/api/questions/${id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                if (!response.ok) throw new Error('Failed to update question');
-                return response.json();
-            },
-            
-            async deleteQuestion(id) {
-                const response = await fetch(`${API_BASE}/api/questions/${id}`, {
-                    method: 'DELETE'
-                });
-                if (!response.ok) throw new Error('Failed to delete question');
-                return response.json();
-            },
-            
-            async checkAnswer(questionId, userAnswer) {
-                const response = await fetch(`${API_BASE}/api/check`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ questionId, userAnswer })
-                });
-                if (!response.ok) throw new Error('Failed to check answer');
-                return response.json();
-            }
-        };
+    
+        Question *
+        
+    
 
-        // State
-        let questions = [];
-        let selectedQuestion = null;
-        let currentView = 'practice';
+    
+        
+            Given Information
+            + Add Line
+        
+        
+    
 
-        // Initialize
-        async function init() {
-            try {
-                questions = await API.getQuestions();
-                if (questions.length > 0) {
-                    selectedQuestion = questions[0];
-                }
-                renderQuestionList();
-                renderQuestionDetail();
-            } catch (error) {
-                console.error('Initialization error:', error);
-                showError('Failed to load questions. Please refresh the page.');
-            }
+    
+        Formula *
+        
+    
+
+    
+        
+            Answer *
             
-            // Event listeners
-            document.getElementById('practiceBtn').addEventListener('click', () => switchView('practice'));
-            document.getElementById('manageBtn').addEventListener('click', () => switchView('manage'));
-            document.getElementById('addQuestionBtn').addEventListener('click', () => openAddModal());
-            document.getElementById('closeModal').addEventListener('click', () => closeAddModal());
-            document.getElementById('cancelBtn').addEventListener('click', () => closeAddModal());
-            document.getElementById('submitBtn').addEventListener('click', () => handleAddQuestion());
-            document.getElementById('addInfoBtn').addEventListener('click', () => addGivenInfoInput());
+        
+        
+            Unit *
             
-            // Initialize with one given info input
-            addGivenInfoInput();
+        
+        
+            Tolerance *
+            
+        
+    
+
+    
+        Cancel
+        Add Question
+    
+
+
+
+
+// API Configuration
+const API_BASE = window.location.origin;
+
+// API Functions
+const API = {
+    async getQuestions() {
+        const response = await fetch(`${API_BASE}/api/questions`);
+        if (!response.ok) throw new Error('Failed to load questions');
+        return response.json();
+    },
+    
+    async addQuestion(question) {
+        const response = await fetch(`${API_BASE}/api/questions`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(question)
+        });
+        if (!response.ok) throw new Error('Failed to add question');
+        return response.json();
+    },
+    
+    async updateQuestion(id, data) {
+        const response = await fetch(`${API_BASE}/api/questions/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error('Failed to update question');
+        return response.json();
+    },
+    
+    async deleteQuestion(id) {
+        const response = await fetch(`${API_BASE}/api/questions/${id}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) throw new Error('Failed to delete question');
+        return response.json();
+    },
+    
+    async checkAnswer(questionId, userAnswer) {
+        const response = await fetch(`${API_BASE}/api/check`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ questionId, userAnswer })
+        });
+        if (!response.ok) throw new Error('Failed to check answer');
+        return response.json();
+    }
+};
+
+// State
+let questions = [];
+let selectedQuestion = null;
+let currentView = 'practice';
+
+// Initialize
+async function init() {
+    try {
+        questions = await API.getQuestions();
+        if (questions.length > 0) {
+            selectedQuestion = questions[0];
         }
+        renderQuestionList();
+        renderQuestionDetail();
+    } catch (error) {
+        console.error('Initialization error:', error);
+        showError('Failed to load questions. Please refresh the page.');
+    }
+    
+    // Event listeners
+    document.getElementById('practiceBtn').addEventListener('click', () => switchView('practice'));
+    document.getElementById('manageBtn').addEventListener('click', () => switchView('manage'));
+    document.getElementById('addQuestionBtn').addEventListener('click', () => openAddModal());
+    document.getElementById('closeModal').addEventListener('click', () => closeAddModal());
+    document.getElementById('cancelBtn').addEventListener('click', () => closeAddModal());
+    document.getElementById('submitBtn').addEventListener('click', () => handleAddQuestion());
+    document.getElementById('addInfoBtn').addEventListener('click', () => addGivenInfoInput());
+    
+    // Initialize with one given info input
+    addGivenInfoInput();
+}
 
-        function showError(message) {
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error';
-            errorDiv.textContent = message;
-            document.querySelector('.container').prepend(errorDiv);
-            setTimeout(() => errorDiv.remove(), 5000);
-        }
+function showError(message) {
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error';
+    errorDiv.textContent = message;
+    document.querySelector('.container').prepend(errorDiv);
+    setTimeout(() => errorDiv.remove(), 5000);
+}
 
-        function switchView(view) {
-            currentView = view;
+function switchView(view) {
+    currentView = view;
+    
+    if (view === 'practice') {
+        document.getElementById('practiceView').classList.remove('hidden');
+        document.getElementById('manageView').classList.add('hidden');
+        document.getElementById('practiceBtn').classList.add('active');
+        document.getElementById('manageBtn').classList.remove('active');
+    } else {
+        document.getElementById('practiceView').classList.add('hidden');
+        document.getElementById('manageView').classList.remove('hidden');
+        document.getElementById('practiceBtn').classList.remove('active');
+        document.getElementById('manageBtn').classList.add('active');
+        renderManageView();
+    }
+}
+
+function renderQuestionList() {
+    const list = document.getElementById('questionList');
+    if (questions.length === 0) {
+        list.innerHTML = 'No questions available';
+        return;
+    }
+    
+    list.innerHTML = questions.map(q => `
+        
             
-            if (view === 'practice') {
-                document.getElementById('practiceView').classList.remove('hidden');
-                document.getElementById('manageView').classList.add('hidden');
-                document.getElementById('practiceBtn').classList.add('active');
-                document.getElementById('manageBtn').classList.remove('active');
-            } else {
-                document.getElementById('practiceView').classList.add('hidden');
-                document.getElementById('manageView').classList.remove('hidden');
-                document.getElementById('practiceBtn').classList.remove('active');
-                document.getElementById('manageBtn').classList.add('active');
-                renderManageView();
-            }
-        }
-
-        function renderQuestionList() {
-            const list = document.getElementById('questionList');
-            if (questions.length === 0) {
-                list.innerHTML = 'No questions available';
-                return;
-            }
+                
+                    ${q.title}
+                    ${q.category} • ${q.difficulty}
+                
+                
             
-            list.innerHTML = questions.map(q => `
+        
+    `).join('');
+}
+
+function selectQuestion(id) {
+    selectedQuestion = questions.find(q => q.id === id);
+    renderQuestionList();
+    renderQuestionDetail();
+}
+
+function renderQuestionDetail() {
+    const detail = document.getElementById('questionDetail');
+    
+    if (!selectedQuestion) {
+        detail.innerHTML = 'Select a question to begin';
+        return;
+    }
+    
+    detail.innerHTML = `
+        
+            
+                ${selectedQuestion.title}
+                ${selectedQuestion.category}
+                ${selectedQuestion.difficulty}
+            
+            ${selectedQuestion.description}
+
+            
+                Given Information:
+                
+                    ${selectedQuestion.givenInfo.map(info => `${info}`).join('')}
+                
+            
+
+            
+                Question:
+                ${selectedQuestion.question}
+            
+
+            
+        
+    `;
+    
+    renderAnswerSection();
+}
+
+function renderAnswerSection() {
+    const section = document.getElementById('answerSection');
+    const userAnswer = sessionStorage.getItem(`answer_${selectedQuestion.id}`) || '';
+    const feedback = sessionStorage.getItem(`feedback_${selectedQuestion.id}`);
+    
+    if (feedback) {
+        const feedbackData = JSON.parse(feedback);
+        section.innerHTML = `
+            
+                ${feedbackData.correct ? '✓ Correct!' : '✗ Incorrect'}
+                ${feedbackData.message}
+                
+                
+                    Solution:
+                    ${selectedQuestion.formula}
+                    
+                        Substituting the values and solving gives ${selectedQuestion.answer} ${selectedQuestion.unit}
+                    
+                
+
+                
+                    Next Question
+                
+            
+        `;
+    } else {
+        section.innerHTML = `
+            
+                
+                    Your Answer (${selectedQuestion.unit}):
+                
                 
                     
-                        
-                            ${q.title}
-                            ${q.category} • ${q.difficulty}
-                        
-                        
-                    
+                    Submit
                 
-            `).join('');
-        }
+            
+        `;
+    }
+}
 
-        function selectQuestion(id) {
-            selectedQuestion = questions.find(q => q.id === id);
+async function submitAnswer() {
+    const input = document.getElementById('userAnswer');
+    const userAnswer = input.value.trim();
+    
+    if (!userAnswer) return;
+    
+    try {
+        const result = await API.checkAnswer(selectedQuestion.id, userAnswer);
+        sessionStorage.setItem(`answer_${selectedQuestion.id}`, userAnswer);
+        sessionStorage.setItem(`feedback_${selectedQuestion.id}`, JSON.stringify(result));
+        
+        if (result.correct) {
+            await API.updateQuestion(selectedQuestion.id, { completed: true });
+            questions = await API.getQuestions();
+            selectedQuestion = questions.find(q => q.id === selectedQuestion.id);
             renderQuestionList();
-            renderQuestionDetail();
         }
+        
+        renderAnswerSection();
+    } catch (error) {
+        console.error('Submit error:', error);
+        showError('Failed to submit answer. Please try again.');
+    }
+}
 
-        function renderQuestionDetail() {
-            const detail = document.getElementById('questionDetail');
-            
-            if (!selectedQuestion) {
-                detail.innerHTML = 'Select a question to begin';
-                return;
-            }
-            
-            detail.innerHTML = `
-                
-                    
-                        ${selectedQuestion.title}
-                        ${selectedQuestion.category}
-                        ${selectedQuestion.difficulty}
-                    
-                    ${selectedQuestion.description}
-
-                    
-                        Given Information:
-                        
-                            ${selectedQuestion.givenInfo.map(info => `${info}`).join('')}
-                        
-                    
-
-                    
-                        Question:
-                        ${selectedQuestion.question}
-                    
-
-                    
-                
-            `;
-            
-            renderAnswerSection();
-        }
-
-        function renderAnswerSection() {
-            const section = document.getElementById('answerSection');
-            const userAnswer = sessionStorage.getItem(`answer_${selectedQuestion.id}`) || '';
-            const feedback = sessionStorage.getItem(`feedback_${selectedQuestion.id}`);
-            
-            if (feedback) {
-                const feedbackData = JSON.parse(feedback);
-                section.innerHTML = `
-                    
-                        ${feedbackData.correct ? '✓ Correct!' : '✗ Incorrect'}
-                        ${feedbackData.message}
-                        
-                        
-                            Solution:
-                            ${selectedQuestion.formula}
-                            
-                                Substituting the values and solving gives ${selectedQuestion.answer} ${selectedQuestion.unit}
-                            
-                        
-
-                        
-                            Next Question
-                        
-                    
-                `;
-            } else {
-                section.innerHTML = `
-                    
-                        
-                            Your Answer (${selectedQuestion.unit}):
-                        
-                        
-                            
-                            Submit
-                        
-                    
-                `;
-            }
-        }
-
-        async function submitAnswer() {
-            const input = document.getElementById('userAnswer');
-            const userAnswer = input.value.trim();
-            
-            if (!userAnswer) return;
-            
-            try {
-                const result = await API.checkAnswer(selectedQuestion.id, userAnswer);
-                sessionStorage.setItem(`answer_${selectedQuestion.id}`, userAnswer);
-                sessionStorage.setItem(`feedback_${selectedQuestion.id}`, JSON.stringify(result));
-                
-                if (result.correct) {
-                    await API.updateQuestion(selectedQuestion.id, { completed: true });
-                    questions = await API.getQuestions();
-                    selectedQuestion = questions.find(q => q.id === selectedQuestion.id);
-                    renderQuestionList();
-                }
-                
-                renderAnswerSection();
-            } catch (error) {
-                console.error('Submit error:', error);
-                showError('Failed to submit answer. Please try again.');
-            }
-        }
-
-        function nextQuestion() {
-            sessionStorage.removeItem(`answer_${selectedQuestion.id}`);
-            sessionStorage.removeItem(`feedback_${selectedQuestion.id}`);
-            
-            const currentIndex = questions.findIndex(q => q.id === selectedQuestion.id);
-            const nextIndex = (currentIndex + 1) % questions.length;
-            selectQuestion(questions[nextIndex].id);
-        }
-
-        function renderManageView() {
-            const grid = document.getElementById('manageGrid');
-            if (questions.length === 0) {
-                grid.innerHTML = 'No questions available. Click "Add Question" to create one.';
-                return;
-            }
-            
-            grid.innerHTML = questions.map(q => `
-                
-                    
-                        ${q.title}
-                        
-                            ${q.category}
-                            ${q.difficulty}
-                        
-                        ${q.description}
-                        
-                            Answer: ${q.answer} ${q.unit}
-                        
-                    
-                    ×
-                
-            `).join('');
-        }
-
-        async function deleteQuestion(id) {
-            if (!confirm('Are you sure you want to delete this question?')) return;
-            
-            try {
-                await API.deleteQuestion(id);
-                questions = await API.getQuestions();
-                
-                if (selectedQuestion?.id === id) {
-                    selectedQuestion = questions[0] || null;
-                }
-                
-                renderManageView();
-                renderQuestionList();
-            } catch (error) {
-                console.error('Delete error:', error);
-                showError('Failed to delete question. Please try again.');
-            }
-        }
-
-        function openAddModal() {
-            document.getElementById('addModal').classList.add('active');
-            document.getElementById('givenInfoInputs').innerHTML = '';
-            addGivenInfoInput();
-        }
-
-        function closeAddModal() {
-            document.getElementById('addModal').classList.remove('active');
-            clearForm();
-        }
-
-        function clearForm() {
-            document.getElementById('inputTitle').value = '';
-            document.getElementById('inputCategory').value = 'Mechanical';
-            document.getElementById('inputDifficulty').value = 'Medium';
-            document.getElementById('inputDescription').value = '';
-            document.getElementById('inputQuestion').value = '';
-            document.getElementById('inputFormula').value = '';
-            document.getElementById('inputAnswer').value = '';
-            document.getElementById('inputUnit').value = '';
-            document.getElementById('inputTolerance').value = '0.01';
-            document.getElementById('givenInfoInputs').innerHTML = '';
-        }
-
-        function addGivenInfoInput() {
-            const container = document.getElementById('givenInfoInputs');
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.className = 'input';
-            input.placeholder = 'e.g., Length (L) = 10 m';
-            input.style.marginBottom = '0.5rem';
-            container.appendChild(input);
-        }
-
-        async function handleAddQuestion() {
-            const title = document.getElementById('inputTitle').value.trim();
-            const category = document.getElementById('inputCategory').value;
-            const difficulty = document.getElementById('inputDifficulty').value;
-            const description = document.getElementById('inputDescription').value.trim();
-            const question = document.getElementById('inputQuestion').value.trim();
-            const formula = document.getElementById('inputFormula').value.trim();
-            const answer = document.getElementById('inputAnswer').value.trim();
-            const unit = document.getElementById('inputUnit').value.trim();
-            const tolerance = document.getElementById('inputTolerance').value;
-
-            if (!title || !description || !question || !formula || !answer || !unit) {
-                alert('Please fill in all required fields');
-                return;
-            }
-
-            const givenInfoInputs = document.getElementById('givenInfoInputs').getElementsByTagName('input');
-            const givenInfo = Array.from(givenInfoInputs)
-                .map(input => input.value.trim())
-                .filter(val => val);
-
-            const newQuestion = {
-                title,
-                category,
-                difficulty,
-                description,
-                question,
-                givenInfo,
-                formula,
-                answer,
-                unit,
-                tolerance: parseFloat(tolerance)
-            };
-
-            try {
-                await API.addQuestion(newQuestion);
-                questions = await API.getQuestions();
-                
-                closeAddModal();
-                renderManageView();
-                renderQuestionList();
-                
-                alert('Question added successfully!');
-            } catch (error) {
-                console.error('Add question error:', error);
-                showError('Failed to add question. Please try again.');
-            }
-        }
-
-        // Start the app
-        init();
+function nextQuestion() {
+    sessionStorage.removeItem(`answer_${selectedQuestion.id}`);
+    sessionStorage.removeItem(`feedback_${selectedQuestion.id}`);
     
+    const currentIndex = questions.findIndex(q => q.id === selectedQuestion.id);
+    const nextIndex = (currentIndex + 1) % questions.length;
+    selectQuestion(questions[nextIndex].id);
+}
 
+function renderManageView() {
+    const grid = document.getElementById('manageGrid');
+    if (questions.length === 0) {
+        grid.innerHTML = 'No questions available. Click "Add Question" to create one.';
+        return;
+    }
+    
+    grid.innerHTML = questions.map(q => `
+        
+            
+                ${q.title}
+                
+                    ${q.category}
+                    ${q.difficulty}
+                
+                ${q.description}
+                
+                    Answer: ${q.answer} ${q.unit}
+                
+            
+            ×
+        
+    `).join('');
+}
 
-```
+async function deleteQuestion(id) {
+    if (!confirm('Are you sure you want to delete this question?')) return;
+    
+    try {
+        await API.deleteQuestion(id);
+        questions = await API.getQuestions();
+        
+        if (selectedQuestion?.id === id) {
+            selectedQuestion = questions[0] || null;
+        }
+        
+        renderManageView();
+        renderQuestionList();
+    } catch (error) {
+        console.error('Delete error:', error);
+        showError('Failed to delete question. Please try again.');
+    }
+}
+
+function openAddModal() {
+    document.getElementById('addModal').classList.add('active');
+    document.getElementById('givenInfoInputs').innerHTML = '';
+    addGivenInfoInput();
+}
+
+function closeAddModal() {
+    document.getElementById('addModal').classList.remove('active');
+    clearForm();
+}
+
+function clearForm() {
+    document.getElementById('inputTitle').value = '';
+    document.getElementById('inputCategory').value = 'Mechanical';
+    document.getElementById('inputDifficulty').value = 'Medium';
+    document.getElementById('inputDescription').value = '';
+    document.getElementById('inputQuestion').value = '';
+    document.getElementById('inputFormula').value = '';
+    document.getElementById('inputAnswer').value = '';
+    document.getElementById('inputUnit').value = '';
+    document.getElementById('inputTolerance').value = '0.01';
+    document.getElementById('givenInfoInputs').innerHTML = '';
+}
+
+function addGivenInfoInput() {
+    const container = document.getElementById('givenInfoInputs');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'input';
+    input.placeholder = 'e.g., Length (L) = 10 m';
+    input.style.marginBottom = '0.5rem';
+    container.appendChild(input);
+}
+
+async function handleAddQuestion() {
+    const title = document.getElementById('inputTitle').value.trim();
+    const category = document.getElementById('inputCategory').value;
+    const difficulty = document.getElementById('inputDifficulty').value;
+    const description = document.getElementById('inputDescription').value.trim();
+    const question = document.getElementById('inputQuestion').value.trim();
+    const formula = document.getElementById('inputFormula').value.trim();
+    const answer = document.getElementById('inputAnswer').value.trim();
+    const unit = document.getElementById('inputUnit').value.trim();
+    const tolerance = document.getElementById('inputTolerance').value;
+
+    if (!title || !description || !question || !formula || !answer || !unit) {
+        alert('Please fill in all required fields');
+        return;
+    }
+
+    const givenInfoInputs = document.getElementById('givenInfoInputs').getElementsByTagName('input');
+    const givenInfo = Array.from(givenInfoInputs)
+        .map(input => input.value.trim())
+        .filter(val => val);
+
+    const newQuestion = {
+        title,
+        category,
+        difficulty,
+        description,
+        question,
+        givenInfo,
+        formula,
+        answer,
+        unit,
+        tolerance: parseFloat(tolerance)
+    };
+
+    try {
+        await API.addQuestion(newQuestion);
+        questions = await API.getQuestions();
+        
+        closeAddModal();
+        renderManageView();
+        renderQuestionList();
+        
+        alert('Question added successfully!');
+    } catch (error) {
+        console.error('Add question error:', error);
+        showError('Failed to add question. Please try again.');
+    }
+}
+
+// Start the app
+init();
